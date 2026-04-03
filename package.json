@@ -1,0 +1,27 @@
+{
+  "name": "domn8n",
+  "version": "0.1.0",
+  "description": "AI-powered DOM mapper that generates standalone Playwright automation scripts",
+  "type": "module",
+  "bin": {
+    "domn8n": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js"
+  },
+  "keywords": ["automation", "playwright", "dom", "ai"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "inquirer": "^13.3.2",
+    "playwright": "^1.59.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.9",
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2"
+  }
+}
