@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { chromium } from "playwright";
-import inquirer from "inquirer";
 import { getApiKey, ensureDirs } from "./config.js";
 import { initPilot, decideAction } from "./pilot.js";
 import { snapshot, attachNetworkLogger, getNetworkLog } from "./explorer.js";
@@ -144,14 +143,8 @@ async function executeAction(page: any, action: Action) {
 }
 
 async function promptUser(label: string, sensitive: boolean): Promise<string> {
-  const { value } = await inquirer.prompt([
-    {
-      type: sensitive ? "password" : "input",
-      name: "value",
-      message: `domn8n needs: ${label}`,
-    },
-  ]);
-  return value;
+  const { prompt, promptSecret } = await import("./prompt.js");
+  return sensitive ? promptSecret(`domn8n needs: ${label}`) : prompt(`domn8n needs: ${label}`);
 }
 
 function parseArgs(): { url?: string; goal?: string } {
