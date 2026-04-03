@@ -2,7 +2,7 @@ import { homedir } from "os";
 import { join } from "path";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import { existsSync } from "fs";
-import inquirer from "inquirer";
+import { promptSecret } from "./prompt.js";
 
 const BASE_DIR = join(homedir(), ".domn8n");
 const KEYS_DIR = join(BASE_DIR, "keys");
@@ -24,15 +24,7 @@ export async function getApiKey(): Promise<string> {
     if (key) return key;
   }
 
-  const { key } = await inquirer.prompt([
-    {
-      type: "password",
-      name: "key",
-      message: "Claude API key (saved to ~/.domn8n/keys/)",
-      mask: "*",
-    },
-  ]);
-
+  const key = await promptSecret("Claude API key (saved to ~/.domn8n/keys/)");
   await writeFile(KEY_FILE, key, { mode: 0o600 });
   return key;
 }

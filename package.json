@@ -23,11 +23,12 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
-    "inquirer": "^13.3.2",
     "playwright": "^1.59.1"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
-    "@types/inquirer": "^9.0.9",
     "@types/node": "^25.5.0",
     "typescript": "^6.0.2"
   }
