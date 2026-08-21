@@ -24,7 +24,7 @@ export async function getApiKey(): Promise<string> {
     if (key) return key;
   }
 
-  const key = await promptSecret("model API key (saved to ~/.domn8n/keys/)");
+  const key = await promptSecret("Anthropic API key (saved to ~/.domn8n/keys/)");
   await writeFile(KEY_FILE, key, { mode: 0o600 });
   return key;
 }

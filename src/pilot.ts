@@ -36,8 +36,11 @@ export async function decideAction(
 ): Promise<Action> {
   const userMessage = buildPrompt(goal, snap, networkLog, history, error);
 
+  const model = process.env.DOMN8N_MODEL;
+  if (!model) throw new Error("DOMN8N_MODEL is required");
+
   const response = await client.messages.create({
-    model: "model-sonnet-4-20250514",
+    model,
     max_tokens: 1024,
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content: userMessage }],

@@ -2,7 +2,7 @@
 
 AI-powered DOM mapper that generates standalone Playwright automation scripts.
 
-Give it a URL and a goal. It opens a browser, uses model to figure out each page, fills forms, clicks buttons, and when it's done — spits out a standalone Playwright TypeScript script you can run without domn8n.
+Give it a URL and a goal. It opens a browser, uses an AI model to interpret each page, fills forms, clicks buttons, and when it's done — spits out a standalone Playwright TypeScript script you can run without domn8n.
 
 ## Install
 
@@ -22,12 +22,12 @@ npx playwright install chromium
 domn8n --url "https://example.com" --goal "Log in and navigate to billing"
 ```
 
-On first run, it will ask for your model API key (saved to `~/.domn8n/keys/`).
+Set `DOMN8N_MODEL` to a model identifier supported by your Anthropic account. On first run, domn8n asks for your Anthropic API key and saves it under `~/.domn8n/keys/`.
 
 ### What happens
 
 1. Opens a visible Chromium window
-2. model interprets each page and decides what to do next
+2. The model interprets each page and decides what to do next
 3. Prompts you in the terminal when it needs input (credentials, form values, CAPTCHAs)
 4. Retries up to 3 times per step if something fails
 5. Saves a standalone Playwright `.ts` script to `~/.domn8n/scripts/`
@@ -52,7 +52,7 @@ DOMN8N_PASSWORD=secret npx tsx ~/.domn8n/scripts/example-com-login.ts
 Three layers:
 
 - **Explorer** — Extracts a simplified DOM snapshot (interactive elements, forms, links) and captures network calls
-- **Pilot** — Sends the snapshot to model, which returns the next action as structured JSON
+- **Pilot** — Sends the snapshot to the model, which returns the next action as structured JSON
 - **Recorder** — Logs every action and generates a standalone Playwright script at the end
 
 ## Development
